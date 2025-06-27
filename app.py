@@ -11,6 +11,20 @@ options = st.multiselect(
     default=['valuation', 'grade', 'quad', 'valuscor', 'cmp']
 )
 
+def find_stock(df, search_term):
+    # search through nsecode (exact match)
+    if 'nsecode' in df.columns:
+        result = df[df['nsecode'].notna() & (df['nsecode'].astype(str).str.upper() == search_term.upper())]
+        if len(result) > 0:
+            return result
+    
+    # search through name
+    if 'name' in df.columns:
+        result = df[df['name'].str.contains(search_term, case=False, na=False)]
+        if len(result) > 0:
+            return result
+    
+    return pd.DataFrame()
 
 if st.button('Get data'):
     if stock_name and options:
@@ -20,33 +34,31 @@ if st.button('Get data'):
             df_jun = pd.read_excel('file3.xlsx') 
 
 
-            stock_jan = df_jan[df_jan['name'].str.contains(stock_name, case=False, na=False)]
-            stock_apr = df_apr[df_apr['name'].str.contains(stock_name, case=False, na=False)]
-            stock_jun = df_jun[df_jun['name'].str.contains(stock_name, case=False, na=False)]
+            stock_jan = find_stock(df_jan, stock_name.strip())
+            stock_apr = find_stock(df_apr, stock_name.strip())
+            stock_jun = find_stock(df_jun, stock_name.strip())
             
             comparison_data = []
             
             for column in options:
-                row = {
-                    'Metric': column,
-                    'Jan 2025': stock_jan[column].iloc[0] if len(stock_jan) > 0 and column in stock_jan.columns else 'N/A',
-                    'Apr 2025': stock_apr[column].iloc[0] if len(stock_apr) > 0 and column in stock_apr.columns else 'N/A',
-                    'Jun 2025': stock_jun[column].iloc[0] if len(stock_jun) > 0 and column in stock_jun.columns else 'N/A'
-                }
-                comparison_data.append(row)
+                    row = {
+                        'Metric': column,
+                        'Jan 2025': stock_jan[column].iloc[0] if len(stock_jan) > 0 and column in stock_jan.columns else 'N/A',
+                        'Apr 2025': stock_apr[column].iloc[0] if len(stock_apr) > 0 and column in stock_apr.columns else 'N/A',
+                        'Jun 2025': stock_jun[column].iloc[0] if len(stock_jun) > 0 and column in stock_jun.columns else 'N/A'
+                    }
+                    comparison_data.append(row)
+                
             
-            comparison_df = pd.DataFrame(comparison_data)
-
-            actual_stock_name = stock_name  
-            if len(stock_jun) > 0:
-                actual_stock_name = stock_jun['name'].iloc[0]
-            elif len(stock_apr) > 0:
-                actual_stock_name = stock_apr['name'].iloc[0]
-            elif len(stock_jan) > 0:
-                actual_stock_name = stock_jan['name'].iloc[0]
-
-            st.write('Collecting comparison data for:', actual_stock_name)
+            names_row = {
+                'Metric': 'Stock Name',
+                'Jan 2025': stock_jan['name'].iloc[0] if len(stock_jan) > 0 and 'name' in stock_jan.columns else 'N/A',
+                'Apr 2025': stock_apr['name'].iloc[0] if len(stock_apr) > 0 and 'name' in stock_apr.columns else 'N/A',
+                'Jun 2025': stock_jun['name'].iloc[0] if len(stock_jun) > 0 and 'name' in stock_jun.columns else 'N/A'
+            }
+            comparison_data.insert(0, names_row)
             
+            comparison_df = pd.DataFrame(comparison_data).astype(str)
             st.table(comparison_df)
 
 
@@ -58,5 +70,7 @@ if st.button('Get data'):
             st.warning("Please enter a stock name.")
         if not options:
             st.warning("Please select at least one column to compare.")
+
+
 
 
