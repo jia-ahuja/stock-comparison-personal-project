@@ -59,7 +59,7 @@ if st.button('Get data'):
             comparison_data.insert(0, names_row)
             
             comparison_df = pd.DataFrame(comparison_data).astype(str)
-            st.table(comparison_df)
+            st.table(comparison_df.T)
 
 
         except Exception as e:
