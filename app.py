@@ -60,7 +60,7 @@ if st.button('Get data'):
             
             comparison_df = pd.DataFrame(comparison_data).astype(str)
             transposed_df = comparison_df.set_index('Metric').T.reset_index()
-            st.table(transposed_df)
+            st.dataframe(transposed_df, use_container_width=False)
 
 
         except Exception as e:
