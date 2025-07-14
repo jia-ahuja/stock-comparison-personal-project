@@ -8,7 +8,7 @@ stock_name = st.text_input('Stock name')
 options = st.multiselect(
     "Columns to compare",
     ['valuation', 'grade', 'quad', 'valuscor', 'cmp', 'pe', 'fv', 'eq', 'dy', 'np2eq', 'cmp2npeq', 'ttmsal', 'salfy', 'salq0', 'salq1', 'ttmnp', 'npfy', 'npq0', 'npq1', 'ttmeps', 'epsfy', 'epsq0', 'epsq1', 'roe3y', 'roa3y', 'roce3y', 'debt', 'intcov', 'db2eq', 'ncffy', 'fcffy', 'ev2fcf', 'ph'],
-    default=['valuation', 'grade', 'quad', 'valuscor', 'cmp', 'ph', 'np2eq']
+    default=['valuation', 'grade', 'quad', 'valuscor', 'cmp', 'pe', 'fv', 'np2eq', 'ph']
 )
 
 def find_stock(df, search_term):
