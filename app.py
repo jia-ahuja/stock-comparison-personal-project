@@ -8,7 +8,11 @@ st.set_page_config(
 
 st.header('Stock Comparison Tool')
 
+st.markdown("<br>", unsafe_allow_html=True)
+
 stock_name = st.text_input('Stock name')
+
+st.markdown("<br>", unsafe_allow_html=True)
 
 options = st.multiselect(
     "Columns to compare",
@@ -30,6 +34,8 @@ def find_stock(df, search_term):
             return result
     
     return pd.DataFrame()
+
+st.markdown("<br>", unsafe_allow_html=True)
 
 if st.button('Get data'):
     if stock_name and options:
@@ -72,6 +78,8 @@ if st.button('Get data'):
             
             row_height = 38
             table_height = (len(transposed_df) + 1) * row_height 
+            
+            st.markdown("<br>", unsafe_allow_html=True)
             st.dataframe(transposed_df, use_container_width=True, height=table_height)
             
 
@@ -83,6 +91,7 @@ if st.button('Get data'):
             st.warning("Please enter a stock name.")
         if not options:
             st.warning("Please select at least one column to compare.")
+
 
 
 
