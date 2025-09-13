@@ -64,7 +64,7 @@ if st.button('Get data'):
             
             comparison_df = pd.DataFrame(comparison_data).astype(str)
             transposed_df = comparison_df.set_index('Metric').T.reset_index()
-            st.dataframe(transposed_df, use_container_width=False, height=150)
+            st.dataframe(transposed_df, use_container_width=False, height=500)
 
 
         except Exception as e:
@@ -75,6 +75,7 @@ if st.button('Get data'):
             st.warning("Please enter a stock name.")
         if not options:
             st.warning("Please select at least one column to compare.")
+
 
 
 
