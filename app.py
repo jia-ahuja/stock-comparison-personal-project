@@ -59,7 +59,7 @@ if st.button('Get data'):
                 'Jun 2025': stock_jun['name'].iloc[0] if len(stock_jun) > 0 and 'name' in stock_jun.columns else 'N/A',
                 'Sep 2025': stock_sep['name'].iloc[0] if len(stock_sep) > 0 and 'name' in stock_sep.columns else 'N/A'
             }
-            comparison_data.insert(0, names_row)
+            
             comparison_data.insert(0, names_row)
             
             comparison_df = pd.DataFrame(comparison_data).astype(str)
@@ -75,6 +75,7 @@ if st.button('Get data'):
             st.warning("Please enter a stock name.")
         if not options:
             st.warning("Please select at least one column to compare.")
+
 
 
 
