@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(
+    page_title="Stock Comparison Tool",
+    layout="wide"
+)
+
 st.header('Stock Comparison Tool')
 
 stock_name = st.text_input('Stock name')
@@ -64,8 +69,11 @@ if st.button('Get data'):
             
             comparison_df = pd.DataFrame(comparison_data).astype(str)
             transposed_df = comparison_df.set_index('Metric').T.reset_index()
-            st.dataframe(transposed_df, use_container_width=False, height=500)
-
+            
+            row_height = 38
+            table_height = (len(transposed_df) + 1) * row_height 
+            st.dataframe(transposed_df, use_container_width=True, height=table_height)
+            
 
         except Exception as e:
             st.error(f"An error occurred: {e}")
@@ -75,6 +83,7 @@ if st.button('Get data'):
             st.warning("Please enter a stock name.")
         if not options:
             st.warning("Please select at least one column to compare.")
+
 
 
 
