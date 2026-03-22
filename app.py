@@ -45,12 +45,14 @@ if st.button('Get data'):
             df_jun = pd.read_excel('file3.xlsx') 
             df_sep = pd.read_excel('file4.xlsx')
             df_feb26 = pd.read_excel('file6.xlsx')
+            df_mar26 = pd.read_excel('file7.xlsx')
         
             stock_jan = find_stock(df_jan, stock_name.strip())
             stock_apr = find_stock(df_apr, stock_name.strip())
             stock_jun = find_stock(df_jun, stock_name.strip())
             stock_sep = find_stock(df_sep, stock_name.strip())
             stock_feb26 = find_stock(df_feb26, stock_name.strip())
+            stock_mar26 = find_stock(df_mar26, stock_name.strip())
             
             comparison_data = []
             
@@ -62,6 +64,7 @@ if st.button('Get data'):
                         'Jun 2025': stock_jun[column].iloc[0] if len(stock_jun) > 0 and column in stock_jun.columns else 'N/A',
                         'Sep 2025': stock_sep[column].iloc[0] if len(stock_sep) > 0 and column in stock_sep.columns else 'N/A',
                         'Feb 2026': stock_feb26[column].iloc[0] if len(stock_feb26) > 0 and column in stock_feb26.columns else 'N/A'
+                        'Mar 2026': stock_mar26[column].iloc[0] if len(stock_mar26) > 0 and column in stock_mar26.columns else 'N/A'
                     }
                     comparison_data.append(row)
                 
@@ -73,6 +76,7 @@ if st.button('Get data'):
                 'Jun 2025': stock_jun['name'].iloc[0] if len(stock_jun) > 0 and 'name' in stock_jun.columns else 'N/A',
                 'Sep 2025': stock_sep['name'].iloc[0] if len(stock_sep) > 0 and 'name' in stock_sep.columns else 'N/A',
                 'Feb 2026': stock_feb26['name'].iloc[0] if len(stock_feb26) > 0 and 'name' in stock_feb26.columns else 'N/A'
+                'Mar 2026': stock_mar26['name'].iloc[0] if len(stock_mar26) > 0 and 'name' in stock_mar26.columns else 'N/A'
             }
             
             comparison_data.insert(0, names_row)
