@@ -63,7 +63,7 @@ if st.button('Get data'):
                         'Apr 2025': stock_apr[column].iloc[0] if len(stock_apr) > 0 and column in stock_apr.columns else 'N/A',
                         'Jun 2025': stock_jun[column].iloc[0] if len(stock_jun) > 0 and column in stock_jun.columns else 'N/A',
                         'Sep 2025': stock_sep[column].iloc[0] if len(stock_sep) > 0 and column in stock_sep.columns else 'N/A',
-                        'Feb 2026': stock_feb26[column].iloc[0] if len(stock_feb26) > 0 and column in stock_feb26.columns else 'N/A'
+                        'Feb 2026': stock_feb26[column].iloc[0] if len(stock_feb26) > 0 and column in stock_feb26.columns else 'N/A',
                         'Mar 2026': stock_mar26[column].iloc[0] if len(stock_mar26) > 0 and column in stock_mar26.columns else 'N/A'
                     }
                     comparison_data.append(row)
@@ -75,7 +75,7 @@ if st.button('Get data'):
                 'Apr 2025': stock_apr['name'].iloc[0] if len(stock_apr) > 0 and 'name' in stock_apr.columns else 'N/A',
                 'Jun 2025': stock_jun['name'].iloc[0] if len(stock_jun) > 0 and 'name' in stock_jun.columns else 'N/A',
                 'Sep 2025': stock_sep['name'].iloc[0] if len(stock_sep) > 0 and 'name' in stock_sep.columns else 'N/A',
-                'Feb 2026': stock_feb26['name'].iloc[0] if len(stock_feb26) > 0 and 'name' in stock_feb26.columns else 'N/A'
+                'Feb 2026': stock_feb26['name'].iloc[0] if len(stock_feb26) > 0 and 'name' in stock_feb26.columns else 'N/A',
                 'Mar 2026': stock_mar26['name'].iloc[0] if len(stock_mar26) > 0 and 'name' in stock_mar26.columns else 'N/A'
             }
             
